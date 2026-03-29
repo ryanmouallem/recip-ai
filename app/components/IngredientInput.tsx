@@ -1,9 +1,13 @@
 'use client';
 import { useState } from 'react';
-import { useRecipes } from '../hooks/useRecipes';
+import { Trash } from 'lucide-react';
 
-export default function IngredientInput() {
-  const { ingredients, addIngredient } = useRecipes();
+type IngredientProps = {
+    ingredients: string[];
+    addIngredient: (ingredient: string) => void;
+}
+
+export default function IngredientInput({ ingredients, addIngredient }: IngredientProps ) {
   const [userInput, setUserInput] = useState('');
 
   return (
@@ -26,7 +30,7 @@ export default function IngredientInput() {
       {ingredients.map((ingredient) => (
         <div key={ingredient}>
           <p>{ingredient}</p>
-          <button>X</button>
+          <button><Trash className='w-6 h-6'/></button>
         </div>
       ))}
     </div>

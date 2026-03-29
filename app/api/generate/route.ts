@@ -1,6 +1,6 @@
+import { Recipe } from '@/app/types/recipe';
 import { GoogleGenAI } from '@google/genai';
 
-// The client gets the API key from the environment variable `GEMINI_API_KEY`.
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const buildRecipePrompt = (ingredients: string[]) =>
@@ -45,10 +45,18 @@ export async function POST(req: Request) {
     const text = response.text;
 
     if (!text) throw new Error('No response from Gemini');
-    const recipes = JSON.parse(text);
+
+    const cleaned = text.replace(/^```json\s*|^```\s*|```$/gm, '').trim();
+    const recipes = JSON.parse(cleaned).map((recipe: Recipe) => ({
+      ...recipe,
+      id: crypto.randomUUID(),
+    }));
 
     return Response.json(recipes);
   } catch (error) {
-    return Response.json({ error: 'Failed to generate recipes' }, { status: 500 });
+    return Response.json(
+      { error: 'Failed to generate recipes' },
+      { status: 500 },
+    );
   }
 }
