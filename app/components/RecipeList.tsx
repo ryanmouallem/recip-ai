@@ -8,7 +8,6 @@ type RecipeListProps = {
 export default function RecipeList({ recipes }: RecipeListProps) {
   return (
     <div>
-        <h1>Recipe List</h1>
             {recipes.map(recipe => (
                 <div key={recipe.id}>
                     <h2>{recipe.title}</h2>

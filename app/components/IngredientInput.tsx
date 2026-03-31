@@ -1,38 +1,55 @@
 'use client';
 import { useState } from 'react';
-import { Trash } from 'lucide-react';
+import { X } from 'lucide-react';
 
 type IngredientProps = {
-    ingredients: string[];
-    addIngredient: (ingredient: string) => void;
-}
+  ingredients: string[];
+  addIngredient: (ingredient: string) => void;
+  removeIngredient: (index: number) => void;
+};
 
-export default function IngredientInput({ ingredients, addIngredient }: IngredientProps ) {
+export default function IngredientInput({
+  ingredients,
+  addIngredient,
+  removeIngredient,
+}: IngredientProps) {
   const [userInput, setUserInput] = useState('');
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder='Add ingredients'
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          addIngredient(userInput);
-          setUserInput('');
-        }}
-      >
-        Add Ingredient
-      </button>
+    <div className='w-full py-2'>
+        <h2 className='text-xs tracking-widest font-medium mb-2 block text-zinc-500'>INGREDIENTS</h2>
+      <div className='flex gap-2 mb-4'>
+          <input
+            type="text"
+            placeholder="e.g. chicken, garlic..."
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            className='flex-1 bg-zinc-800 border border-zinc-700 rounded-lg py-2 px-2 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition-colors'
+          />
+          <button
+            className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-100 rounded-lg py-2 px-4 cursor-pointer"
+            onClick={() => {
+              addIngredient(userInput);
+              setUserInput('');
+            }}
+          >
+            + Add
+          </button>
+      </div>
 
-      {ingredients.map((ingredient) => (
-        <div key={ingredient}>
-          <p>{ingredient}</p>
-          <button><Trash className='w-6 h-6'/></button>
-        </div>
-      ))}
+      <div className='flex flex-col gap-2'>
+          {ingredients.map((ingredient, index) => (
+            <div
+              key={ingredient}
+              className="bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2 flex items-center justify-between text-sm text-zinc-100"
+            >
+              <span>{ingredient}</span>
+              <button onClick={() => removeIngredient(index)}>
+                <X className="w-5 h-5 text-zinc-500 hover:text-red-400" />
+              </button>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import IngredientInput from './components/IngredientInput';
 import RecipeList from './components/RecipeList';
@@ -11,23 +11,38 @@ export default function App() {
     addIngredient,
     recipes,
     generateRecipes,
+    removeIngredient,
     isLoading,
     error,
   } = useRecipes();
 
   return (
-    <div>
-      <h1>RecipAI</h1>
+    <div className="min-h-screen bg-zinc-900 text-zinc-100 flex flex-col items-center px-4 py-10">
+      <div className="w-full max-w-2xl flex flex-col gap-6">
+        <h1 className="font-bold text-6xl tracking-tight mb-2">
+          Recip<span className="text-amber-400">AI</span>
+        </h1>
+        <h2 className="text-zinc-500 mb-8">
+          Add your ingredients and we'll generate recipes for you.
+        </h2>
 
-      {isLoading && <Loader2 className='animate-spin'/>}
-      {error && <p>{error}</p>}
+        {isLoading && <Loader2 className="animate-spin" />}
+        {error && <p>{error}</p>}
 
-      <IngredientInput ingredients={ingredients} addIngredient={addIngredient}/>
-      <RecipeList recipes={recipes} />
+        <IngredientInput
+          ingredients={ingredients}
+          addIngredient={addIngredient}
+          removeIngredient={removeIngredient}
+        />
+        <RecipeList recipes={recipes} />
 
-      <button
-        onClick={generateRecipes}
-      >Generate Recipes</button>
+        <button
+          onClick={generateRecipes}
+          className="w-full bg-amber-400 hover:bg-amber-500 py-3 px-6 rounded-lg text-zinc-900 text-sm font-semibold mt-4 transition-colors cursor-pointer"
+        >
+          Generate Recipes
+        </button>
+      </div>
     </div>
   );
 }

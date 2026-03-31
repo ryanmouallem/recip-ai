@@ -11,6 +11,10 @@ export function useRecipes() {
     setIngredients((ingredients) => [...ingredients, ingredient]);
   };
 
+  const removeIngredient = (index: number) => {
+    setIngredients((ingredient) => ingredient.filter((_, i) => i !== index));
+  }
+
   const generateRecipes = async () => {
     setError('');
 
@@ -48,5 +52,6 @@ export function useRecipes() {
     error,
     generateRecipes,
     addIngredient,
+    removeIngredient
   };
 }
