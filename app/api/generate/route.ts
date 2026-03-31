@@ -24,6 +24,7 @@ Rules:
 - Always write recipes in English regardless of the language the ingredients are provided in.
 - You may assume the user has basic pantry staples including salt, pepper, and common dried spices. Do not assume oils, sauces, dairy, or any other ingredients beyond basic seasoning.
 - At the end of each recipe's instructions array, you may add optional enhancement suggestions as strings starting with "Optional:" suggesting common household ingredients that would improve the dish. These are purely suggestions and not required.
+- prepTime should be realistic and account for all preparation and cooking steps. Factor in chopping, preheating, and actual cook times. Do not underestimate.
 
 Each recipe must include:
 - "title": string

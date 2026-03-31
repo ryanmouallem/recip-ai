@@ -3,6 +3,7 @@
 import IngredientInput from './components/IngredientInput';
 import RecipeList from './components/RecipeList';
 import { useRecipes } from './hooks/useRecipes';
+import { Loader2 } from 'lucide-react';
 
 export default function App() {
   const {
@@ -17,6 +18,9 @@ export default function App() {
   return (
     <div>
       <h1>RecipAI</h1>
+
+      {isLoading && <Loader2 className='animate-spin'/>}
+      {error && <p>{error}</p>}
 
       <IngredientInput ingredients={ingredients} addIngredient={addIngredient}/>
       <RecipeList recipes={recipes} />

@@ -12,9 +12,14 @@ export function useRecipes() {
   };
 
   const generateRecipes = async () => {
-    setIsLoading(true);
     setError('');
 
+    if (ingredients.length === 0) {
+      setError('Please add at least one ingredient');
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const response = await fetch('/api/generate', {
         method: 'POST',
