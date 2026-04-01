@@ -23,13 +23,20 @@ export default function IngredientInput({
             type="text"
             placeholder="e.g. chicken, garlic..."
             value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[a-zA-Z\s]*$/.test(value)) {
+                setUserInput(value);
+              }
+            }}
             className='flex-1 bg-zinc-800 border border-zinc-700 rounded-lg py-2 px-4 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition-colors'
           />
           <button
             className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-400 rounded-lg py-2 px-4 cursor-pointer transition-colors"
             onClick={() => {
-              addIngredient(userInput);
+              const trimmedInput = userInput.trim();
+              if (!trimmedInput) return;
+              addIngredient(trimmedInput);
               setUserInput('');
             }}
           >
