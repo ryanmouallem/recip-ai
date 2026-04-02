@@ -6,13 +6,23 @@ import sql from "@/app/lib/db"
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   callbacks: {
-    async signIn({ user }) {
-      if (!user.id) return true
+    async jwt({ token, account, user }) {
+      if (account?.providerAccountId) {
+        token.sub = account.providerAccountId
+        token.name = user.name
+        token.email = user.email
+        token.picture = user.image
+      }
+      return token
+    },
+    async signIn({ user, account }) {
+      const id = account?.providerAccountId
+      if (!id) return true
 
       try {
         await sql`
           INSERT INTO users (id, name, email, image)
-          VALUES (${user.id}, ${user.name}, ${user.email}, ${user.image})
+          VALUES (${id}, ${user.name}, ${user.email}, ${user.image})
           ON CONFLICT (id) DO UPDATE
             SET name = EXCLUDED.name,
                 image = EXCLUDED.image

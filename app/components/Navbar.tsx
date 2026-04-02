@@ -36,7 +36,7 @@ export default async function Navbar() {
           <form
             action={async () => {
               "use server"
-              await signOut()
+              await signOut({ redirectTo: '/?signedOut=true' })
             }}
           >
             <button

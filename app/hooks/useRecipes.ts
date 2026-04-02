@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Recipe } from '../types/recipe';
 
 export function useRecipes() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useState<Recipe[]>(() => {
+    try {
+      const stored = localStorage.getItem('recipai_recipes');
+      return stored ? (JSON.parse(stored) as Recipe[]) : [];
+    } catch {
+      return [];
+    }
+  });
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('recipai_recipes', JSON.stringify(recipes));
+  }, [recipes]);
 
   const addIngredient = (ingredient: string) => {
     setIngredients((ingredients) => [...ingredients, ingredient]);

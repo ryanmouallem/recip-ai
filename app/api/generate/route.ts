@@ -18,7 +18,6 @@ Pre-processing:
 
 Rules:
 - Use only the valid food ingredients provided.
-- Do not add any extra ingredients, pantry staples, oils, spices, sauces, or garnishes unless they are explicitly included.
 - Keep recipes realistic and practical.
 - If ingredients are limited, make simple recipes.
 - Always write recipes in English regardless of the language the ingredients are provided in.

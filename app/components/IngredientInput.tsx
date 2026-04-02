@@ -29,6 +29,14 @@ export default function IngredientInput({
                 setUserInput(value);
               }
             }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const trimmedInput = userInput.trim();
+                if (!trimmedInput) return;
+                addIngredient(trimmedInput);
+                setUserInput('');
+              }
+            }}
             className='flex-1 bg-zinc-800 border border-zinc-700 rounded-lg py-2 px-4 text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition-colors'
           />
           <button
