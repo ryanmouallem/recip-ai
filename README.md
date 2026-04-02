@@ -4,6 +4,11 @@
 
 A web app that generates recipes from ingredients you have on hand, powered by the Gemini API.
 
+## Screenshots
+
+![Generate recipes](screenshots/Screenshot%202026-04-01%20at%205.36.45%20PM.png)
+![Recipe book](screenshots/Screenshot%202026-04-01%20at%205.37.37%20PM.png)
+
 ## What it does
 
 - Enter ingredients you have available
