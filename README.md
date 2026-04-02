@@ -6,8 +6,11 @@ A web app that generates recipes from ingredients you have on hand, powered by t
 
 ## Screenshots
 
-![Generate recipes](screenshots/Screenshot%202026-04-01%20at%205.36.45%20PM.png)
-![Recipe book](screenshots/Screenshot%202026-04-01%20at%205.37.37%20PM.png)
+**Recipe generator**
+<img width="1512" height="949" alt="Screenshot 2026-04-01 at 5 36 45 PM" src="https://github.com/user-attachments/assets/7fcca0ac-0a09-4f0e-b79d-cc9ed4d52f98" />
+
+**Recipe book**
+<img width="1512" height="949" alt="Screenshot 2026-04-01 at 5 37 37 PM" src="https://github.com/user-attachments/assets/1a489a66-1c57-4cce-9194-b9ee78270617" />
 
 ## What it does
 
