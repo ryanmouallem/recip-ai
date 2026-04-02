@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 import IngredientInput from './components/IngredientInput';
 import RecipeList from './components/RecipeList';
+import SignOutBanner from './components/SignOutBanner';
 import { useRecipes } from './hooks/useRecipes';
 import { Loader2 } from 'lucide-react';
 
@@ -18,19 +18,6 @@ export default function App() {
     error,
   } = useRecipes();
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const [showSignedOut, setShowSignedOut] = useState(false);
-
-  useEffect(() => {
-    if (searchParams.get('signedOut') === 'true') {
-      setShowSignedOut(true);
-      router.replace('/');
-      const timer = setTimeout(() => setShowSignedOut(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [searchParams, router]);
-
   return (
     <div className="min-h-screen bg-zinc-900 text-zinc-100 flex flex-col items-center px-4 py-10">
       <div className="w-full max-w-2xl flex flex-col gap-4">
@@ -41,11 +28,9 @@ export default function App() {
           Add your ingredients and we'll generate recipes for you.
         </h2>
 
-        {showSignedOut && (
-          <p className="text-amber-400 text-sm text-center bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3">
-            You've been signed out successfully.
-          </p>
-        )}
+        <Suspense>
+          <SignOutBanner />
+        </Suspense>
 
         {error && <p className="text-red-400 text-sm">{error}</p>}
 

@@ -13,11 +13,11 @@ export async function GET() {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const rows = await sql<SavedRecipeRow>`
+  const rows = (await sql`
     SELECT id, data FROM saved_recipes
     WHERE user_id = ${session.user.id}
     ORDER BY created_at DESC
-  `;
+  `) as SavedRecipeRow[];
 
   const recipes: SavedRecipe[] = rows.map((row) => ({
     savedId: row.id,
