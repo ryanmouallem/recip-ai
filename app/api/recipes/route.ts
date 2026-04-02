@@ -44,7 +44,8 @@ export async function POST(req: Request) {
         ${JSON.stringify(recipe)}::jsonb
       )
     `;
-  } catch {
+  } catch (err) {
+    console.error('Failed to save recipe:', err);
     return Response.json({ error: 'Failed to save recipe' }, { status: 500 });
   }
 
