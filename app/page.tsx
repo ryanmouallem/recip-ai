@@ -42,7 +42,7 @@ export default function App() {
           Generate Recipes
         </button>
 
-        <RecipeList recipes={recipes} />
+        <RecipeList mode="save" recipes={recipes} />
       </div>
     </div>
   );

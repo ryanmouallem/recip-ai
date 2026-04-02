@@ -5,3 +5,5 @@ export type Recipe = {
     prepTime: number;
     instructions: string[];
 }
+
+export type SavedRecipe = Recipe & { savedId: string }
